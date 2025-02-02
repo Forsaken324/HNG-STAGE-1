@@ -16,6 +16,7 @@ The Number Classification API is a RESTful service built using Django REST Frame
 - Python
 - Django REST Framework (DRF)
 - Requests library
+- Gunicorn
 
 
 ## API Endpoint
