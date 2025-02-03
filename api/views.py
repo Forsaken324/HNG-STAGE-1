@@ -41,25 +41,28 @@ def get_fun_fact(n : int) -> str:
 def classify_number(request):
     number = request.GET.get('number')
     # sum digits is the sum of its digits
-    try:
-        number = int(number)
-        if number:
-            properties = []
-            if is_amstrong(number):
-                properties.append('amstrong')
-            properties.append('even' if number % 2 == 0 else "odd")
+    if number is not None:
+        
+        try:
+            number = int(number)
+            if number:
+                properties = []
+                if is_amstrong(number):
+                    properties.append('amstrong')
+                properties.append('even' if number % 2 == 0 else "odd")
+                data = {
+                    "number": number,
+                    "is_prime" : is_prime(number),
+                    "is_perfect" : is_perfect(number),
+                    "properties" : properties,
+                    "digit_sum" : sum(int(digit) for digit in str(number)),
+                    "fun_fact" : get_fun_fact(number)
+                    }
+                return Response(data, status=HTTP_200_OK)
+        except:
             data = {
-                "number": number,
-                "is_prime" : is_prime(number),
-                "is_perfect" : is_perfect(number),
-                "properties" : properties,
-                "digit_sum" : sum(int(digit) for digit in str(number)),
-                "fun_fact" : get_fun_fact(number)
-                }
-            return Response(data, status=HTTP_200_OK)
-    except:
-        data = {
-            "number" : "alphabet",
-            "error" : True
-        }
-        return Response(data, status=HTTP_400_BAD_REQUEST)
+                "number" : "alphabet",
+                "error" : True
+            }
+            return Response(data, status=HTTP_400_BAD_REQUEST)
+    return Response(status=HTTP_200_OK)
