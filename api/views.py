@@ -55,4 +55,5 @@ def classify_number(request):
         }
         
         return Response(response_data, status=status.HTTP_200_OK)
+    return Response(status=status.HTTP_200_OK)
  
