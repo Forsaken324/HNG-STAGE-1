@@ -36,9 +36,6 @@ def get_fun_fact(n):
 def classify_number(request):
     number = request.GET.get('number')
     
-    if not number or not number.lstrip('-').isdigit():
-        return Response({"number": number, "error": True}, status=status.HTTP_400_BAD_REQUEST)
-    
     if number:
         number = int(number)
         digit_sum = sum(int(digit) for digit in str(abs(number)))
