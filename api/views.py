@@ -39,21 +39,23 @@ def classify_number(request):
     if not number or not number.lstrip('-').isdigit():
         return Response({"number": number, "error": True}, status=status.HTTP_400_BAD_REQUEST)
     
-    number = int(number)
-    digit_sum = sum(int(digit) for digit in str(abs(number)))
-    properties = []
-    
-    if is_armstrong(number):
-        properties.append("armstrong")
-    properties.append("even" if number % 2 == 0 else "odd")
-    
-    response_data = {
-        "number": number,
-        "is_prime": is_prime(number),
-        "is_perfect": is_perfect(number),
-        "properties": properties,
-        "digit_sum": digit_sum,
-        "fun_fact": get_fun_fact(number)
-    }
-    
-    return Response(response_data, status=status.HTTP_200_OK)
+    if number:
+        number = int(number)
+        digit_sum = sum(int(digit) for digit in str(abs(number)))
+        properties = []
+        
+        if is_armstrong(number):
+            properties.append("armstrong")
+        properties.append("even" if number % 2 == 0 else "odd")
+        
+        response_data = {
+            "number": number,
+            "is_prime": is_prime(number),
+            "is_perfect": is_perfect(number),
+            "properties": properties,
+            "digit_sum": digit_sum,
+            "fun_fact": get_fun_fact(number)
+        }
+        
+        return Response(response_data, status=status.HTTP_200_OK)
+    return Response()
