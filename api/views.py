@@ -35,6 +35,7 @@ def get_fun_fact(n):
 @api_view(['GET'])
 def classify_number(request):
     number = request.GET.get('number')
+    data = {"error" : True}
     
     if number:
         number = int(number)
@@ -55,5 +56,5 @@ def classify_number(request):
         }
         
         return Response(response_data, status=status.HTTP_200_OK)
-    return Response(status=status.HTTP_200_OK)
+    return Response(data, status=status.HTTP_400_BAD_REQUEST)
  
