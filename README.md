@@ -18,6 +18,8 @@ The Number Classification API is a RESTful service built using Django REST Frame
 - Requests library
 - Gunicorn
 
+## Try out the app
+- https://web-production-da82.up.railway.app/api/classify-number
 
 ## API Endpoint
 
